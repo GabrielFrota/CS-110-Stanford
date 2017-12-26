@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<rss version="2.0">
+  <channel>
+    <item>
+      <title>National News - New York Post</title>
+      <link>http://nypost.com/news/feed/</link>
+    </item>
+    <item>
+      <title>Los Angeles Times - Top News</title>
+      <link>http://www.latimes.com/rss2.0.xml</link>
+    </item>
+  </channel>
+</rss>

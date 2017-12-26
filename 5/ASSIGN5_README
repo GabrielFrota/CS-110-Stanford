@@ -1,0 +1,25 @@
+ficou meio feio o que tive que fazer para usar pthreads com valores privados de um objeto, pois 
+ficou redundante já ter os dados no objeto e ficar criando structs referenciando esses dados, mas 
+acho que não tinha algo muito diferente para se fazer, pois pthread_create aceita apenas 
+funções static, que não são chamadas com um contexto de um objeto. Poderia ter deixado os campos 
+do objeto todos publicos, e passado o endereço do objeto de parametro, mas acho que ficaria feio 
+também, pois expor os campos internos do objeto sempre é desaconselhado. Não queria usar
+a biblioteca de threads do C++, queria usar pthreads, pois achei que seria mais importante para
+futuros projetos praticar pthreads.
+
+Um thread pool tem uma struct ThreadDispatcher threadD, e um array de ThreadTrabalhar threadsT, que 
+são inicializadas no construtor do objeto baseado nos valores dos campos privados, e possuem neles 
+todos os dados que as funções dispatcher e trabalhar precisam. A funçao dispatcher recebe um 
+*ThreadDispatcher de parametro, que tem nele todo o contexto de um thread pool. A funçao trabalhar 
+recebe de parametro um *ThreadTrabalhar, que é um endereço de uma posiçao no array threadsT de 
+um objeto ThreadPool. A funçao novaThreadTrabalhar inicializa uma struct ThreadTrabalhar, e chama 
+pthread_create passando o endereço da struct recem inicializada. ela é chamada caso a quantidade 
+de treadsTrabalhar em um ThreadPool ainda seja menor que a quantidade máxima.
+
+ThreadPool.wait() seta a flagExitDispatcher da struct ThreadDispatcher, que da inicio ao processo 
+de destruiçao do objeto. a funçao dispatcher quando tem flagExitDispatcher=1 e 
+filaFunçoes=empty, seta a flagExitTrabalhar, e chama exit, finalizando sua thread. Toda chamada 
+trabalhar tem um pointeiro flagExit, que é o endereço da flagExitTrabalhar da struct 
+ThreadDispatcher que a criou, portanto uma dispatcher que seta flagExitTrabalhar, da inicio na 
+finalizaçao de todos os seus filhos.
+
