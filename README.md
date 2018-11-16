@@ -1,6 +1,7 @@
 Implementação dos projetos de programação da disciplina de Princípios de Sistemas de Computação de Stanford <br /> <br />
 
-cs110.stanford.edu <br /> <br />
+http://cs110.stanford.edu <br />
+https://quip.com/sPrOAn0Mbzp4 <br /> <br />
 
 Os projetos não são da iteração mais atual da disciplina, pois o starter code dos projetos disponível na internet é do
 ano de 2013 ou 2014. Coloquei em cada pasta um pdf com a especificação do projeto que foi feito.
